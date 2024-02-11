@@ -35,31 +35,36 @@ function exerciseDetails() {
   const exercise = data?.exercises[0];
   
   return (
-    <>
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
     <Stack.Screen options={{title: exercise.name}}/>
-    <View style={styles.panel}>
-    <Text>
-      exercise Details: {name}
-    </Text>
-    <Text style={styles.exerciseSubTitle}>
-    {exercise.muscle} {' '} {exercise.equipment}</Text>
-    </View>
-    <View style={styles.panel}>
-    <Text style={styles.instuction}numberOfLines={isExpanded ? 0 : 3} >
-    {exercise.instructions}
-    </Text>
-    <Text onPress={()=>setIsExpanded(isExpanded=>!isExpanded)} style={styles.seeMore}>
-    {isExpanded ? 'See Less' : 'See More'}
-    </Text>
-    </View>
-    <NewSetInput exerciseName={exercise.name}/>
-    </ScrollView>
-    <SetList/>
-    </>
-  )
-}
     
+    <SetList ListHeaderComponent={()=>(
+      <View style={{gap:5}}>
+      <View style={styles.panel}>
+      <Text>
+      exercise Details: {name}
+      </Text>
+      <Text style={styles.exerciseSubTitle}>
+      {exercise.muscle} {' '} {exercise.equipment}</Text>
+      </View>
+      <View style={styles.panel}>
+      <Text style={styles.instuction}numberOfLines={isExpanded ? 0 : 3} >
+      {exercise.instructions}
+      </Text>
+      <Text onPress={()=>setIsExpanded(isExpanded=>!isExpanded)} style={styles.seeMore}>
+      {isExpanded ? 'See Less' : 'See More'}
+      </Text>
+      </View>
+      <NewSetInput exerciseName={exercise.name}/>
+      </View>
+      )}/>
+   
+      </View>
+      )
+    }
+    
+      
+      
 
 export default exerciseDetails;
 

@@ -15,7 +15,7 @@ query sets{
     }
 }
 `
-const SetList = () => {
+const SetList = ({ListHeaderComponent}) => {
 
  const { data,isLoading,error} = useQuery({
         queryKey:['sets'],
@@ -24,7 +24,10 @@ const SetList = () => {
 
     if(isLoading) return <ActivityIndicator/>
   return (
-    <FlatList data={data?.sets?.documents}
+    <FlatList
+    showsVerticalScrollIndicator={false}
+    ListHeaderComponent={ListHeaderComponent}
+    data={data?.sets?.documents}
     renderItem={({item}) => (
         <Text style={{
             backgroundColor:'white',

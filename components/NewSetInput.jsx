@@ -67,6 +67,7 @@ const NewSetInput = ({exerciseName}) => {
 }
 
 const styles = StyleSheet.create({
+
     container: {
         backgroundColor: 'white',
         padding: 10,
@@ -78,9 +79,9 @@ const styles = StyleSheet.create({
     input: {
         borderWidth: StyleSheet.hairlineWidth,
         padding: 10,
-         flex: 1,
-         borderRadius: 5,
-         borderColor:'gainsboro'
+        flex: 1,
+        borderRadius: 5,
+        borderColor:'gainsboro'
     }
 })
 
