@@ -1,16 +1,20 @@
-type InsertSet {
+type InsertSetDocument {
   insertedId: String
 }
 
-scalar InputDocument
+input NewSet {
+  exercise: String!
+  reps: Int!
+  weight: Float
+}
 
 type Mutation {
-  myQuery(
+  InsertSet(
     collection: String
     dataSource: String
     database: String
-    document: InputDocument
-  ): InsertSet
+    document: NewSet
+  ): InsertSetDocument
     @rest(
       method: POST
       endpoint: "https://ap-south-1.aws.data.mongodb-api.com/app/data-khejr/endpoint/data/v1/action/insertOne"

@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { gql } from "graphql-request";
 import client from "../components/graphqlClient";
 import NewSetInput from "../components/NewSetInput";
+import SetList from "../components/SetList";
 const exerciseQuery = gql`
 query exercises( $name: String) {
 exercises( name: $name) {
@@ -34,6 +35,7 @@ function exerciseDetails() {
   const exercise = data?.exercises[0];
   
   return (
+    <>
     <ScrollView contentContainerStyle={styles.container}>
     <Stack.Screen options={{title: exercise.name}}/>
     <View style={styles.panel}>
@@ -51,8 +53,10 @@ function exerciseDetails() {
     {isExpanded ? 'See Less' : 'See More'}
     </Text>
     </View>
-    <NewSetInput/>
+    <NewSetInput exerciseName={exercise.name}/>
     </ScrollView>
+    <SetList/>
+    </>
   )
 }
     

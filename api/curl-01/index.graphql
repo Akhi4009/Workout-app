@@ -20,7 +20,7 @@ type Query {
           name: "api-key"
           value: "TD6Nz2uWJwbnOVpj4fW5DPlYBgJehhsejvJuo3PHsZJFaki2ww4cfTootTSt1VRY"
         }
-      ],
+      ]
       postbody: """
       {
       "collection": "sets",
