@@ -10,7 +10,7 @@ type Root {
 }
 
 type Query {
-  sets: Root
+  sets(exercise: String): Root
     @rest(
       method: POST
       endpoint: "https://ap-south-1.aws.data.mongodb-api.com/app/data-khejr/endpoint/data/v1/action/find"
@@ -25,7 +25,8 @@ type Query {
       {
       "collection": "sets",
       "dataSource": "Cluster0",
-      "database": "Workout"
+      "database": "Workout",
+      "filter": { "exercise": "{{ .Get "exercise"}}" }
       }
       """
     )
