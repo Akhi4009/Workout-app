@@ -1,28 +1,31 @@
 import { View, Text, ActivityIndicator, FlatList } from 'react-native'
-import { gql } from "graphql-request";
+import { GraphQLClient, gql } from "graphql-request";
 import { useQuery } from '@tanstack/react-query';
 import client from './graphqlClient';
 
 const setsQuery = gql`
-query sets{
-    sets{
-        documents{
-            _id
-            exercise
-            reps
-            weight
-        }
+query MyQuery($exercise: String){
+    sets(exercise: $exercise) {
+      documents {
+        _id
+        exercise
+        reps
+        weight
+      }
     }
-}
+  }
 `
-const SetList = ({ListHeaderComponent}) => {
+const SetList = ({ListHeaderComponent, exerciseName}) => {
 
  const { data,isLoading,error} = useQuery({
-        queryKey:['sets'],
-        queryFn:async ()=> client.request(setsQuery)
-    })
+        queryKey:['sets',exerciseName],
+        queryFn:async ()=> client.request(setsQuery,{exercise: exerciseName})
 
+    })
+    
     if(isLoading) return <ActivityIndicator/>
+   
+   
   return (
     <FlatList
     showsVerticalScrollIndicator={false}

@@ -1,16 +1,12 @@
- curl  --request POST 'https://ap-south-1.aws.data.mongodb-api.com/app/data-khejr/endpoint/data/v1/action/insertOne' \
+ curl  --request POST 'https://ap-south-1.aws.data.mongodb-api.com/app/data-khejr/endpoint/data/v1/action/find' \
 --header 'Content-Type: application/json' \
 --header 'Access-Control-Request-Headers: *' \
 --header 'api-key: TD6Nz2uWJwbnOVpj4fW5DPlYBgJehhsejvJuo3PHsZJFaki2ww4cfTootTSt1VRY' \
 --data-raw '{
-    "collection":"sets",
-    "database":"Workout",
-    "dataSource":"Cluster0",
-    "document": {
-         "exercise": "chest",
-        "reps": 4,
-        "weight": 40
-    }
+    "collection": "sets",
+    "database": "Workout",
+    "dataSource": "Cluster0",
+    "filter": { "exercise" :"chest" }
 }'
 
 

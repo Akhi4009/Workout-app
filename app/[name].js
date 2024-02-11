@@ -38,7 +38,9 @@ function exerciseDetails() {
     <View style={styles.container}>
     <Stack.Screen options={{title: exercise.name}}/>
     
-    <SetList ListHeaderComponent={()=>(
+    <SetList 
+     exerciseName={exercise.name}
+     ListHeaderComponent={()=>(
       <View style={{gap:5}}>
       <View style={styles.panel}>
       <Text>
