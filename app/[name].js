@@ -1,21 +1,43 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native"
+import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from "react-native"
 import { useLocalSearchParams, Stack } from "expo-router";
-import exercises from "../assets/data/exercises.json";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { gql } from "graphql-request";
+import client from "../components/graphqlClient";
+const exerciseQuery = gql`
+query exercises( $name: String) {
+exercises( name: $name) {
+  equipment
+  muscle
+  name
+  instructions
+}
+}
+`
+
 
 function exerciseDetails() {
-  const params = useLocalSearchParams();
+  const {name} = useLocalSearchParams();
   const [isExpanded,setIsExpanded] = useState(false);
 
-  const exercise = exercises.find(item=>item.name===params.name);
+
+ const {data, isLoading, error} = useQuery({
+    queryKey:['exercises', name],
+    queryFn:async () => client.request(exerciseQuery, {name})
+  })
+
+
+  if(isLoading) return <ActivityIndicator/>;
+  if(error) return <Text>Failed to load to data</Text>;
+
+  const exercise = data?.exercises[0];
   
-  if(!exercise) return <Text> Exercise not found</Text>;
   return (
     <ScrollView contentContainerStyle={styles.container}>
     <Stack.Screen options={{title: exercise.name}}/>
     <View style={styles.panel}>
     <Text>
-    exercise Details: {params.name}
+      exercise Details: {name}
     </Text>
     <Text style={styles.exerciseSubTitle}>
     {exercise.muscle} {' '} {exercise.equipment}</Text>

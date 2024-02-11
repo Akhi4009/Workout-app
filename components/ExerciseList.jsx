@@ -14,8 +14,7 @@ function ExerciseListItem({item}){
 
 
 const styles = StyleSheet.create({
-    
-    exerciseContainer: {
+   exerciseContainer: {
       backgroundColor:'#fff',
       padding: 10,
       borderRadius:10,
