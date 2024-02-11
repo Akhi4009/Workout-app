@@ -1,0 +1,25 @@
+type InsertSet {
+  insertedId: String
+}
+
+scalar InputDocument
+
+type Mutation {
+  myQuery(
+    collection: String
+    dataSource: String
+    database: String
+    document: InputDocument
+  ): InsertSet
+    @rest(
+      method: POST
+      endpoint: "https://ap-south-1.aws.data.mongodb-api.com/app/data-khejr/endpoint/data/v1/action/insertOne"
+      headers: [
+        { name: "access-control-request-headers", value: "*" }
+        {
+          name: "api-key"
+          value: "TD6Nz2uWJwbnOVpj4fW5DPlYBgJehhsejvJuo3PHsZJFaki2ww4cfTootTSt1VRY"
+        }
+      ]
+    )
+}

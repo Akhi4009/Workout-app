@@ -1,0 +1,32 @@
+type DocumentsEntry {
+  _id: String
+  exercise: String
+  reps: Int
+  weight: Int
+}
+
+type Root {
+  documents: [DocumentsEntry]
+}
+
+type Query {
+  sets: Root
+    @rest(
+      method: POST
+      endpoint: "https://ap-south-1.aws.data.mongodb-api.com/app/data-khejr/endpoint/data/v1/action/find"
+      headers: [
+        { name: "access-control-request-headers", value: "*" }
+        {
+          name: "api-key"
+          value: "TD6Nz2uWJwbnOVpj4fW5DPlYBgJehhsejvJuo3PHsZJFaki2ww4cfTootTSt1VRY"
+        }
+      ],
+      postbody: """
+      {
+      "collection": "sets",
+      "dataSource": "Cluster0",
+      "database": "Workout"
+      }
+      """
+    )
+}
