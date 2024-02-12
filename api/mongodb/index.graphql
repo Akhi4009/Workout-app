@@ -1,16 +1,16 @@
 type DocumentsEntry {
   _id: String
-  exercise: String
-  reps: Int
+  exercise: String!
+  reps: Int!
   weight: Int
-}
+ }
 
 type Root {
   documents: [DocumentsEntry]
 }
 
 type Query {
-  sets(exercise: String): Root
+  sets(exercise: String, username:String!): Root
     @rest(
       method: POST
       endpoint: "https://ap-south-1.aws.data.mongodb-api.com/app/data-khejr/endpoint/data/v1/action/find"
@@ -26,7 +26,11 @@ type Query {
       "collection": "sets",
       "dataSource": "Cluster0",
       "database": "Workout",
-      "filter": { "exercise": "{{ .Get "exercise"}}" }
+      "filter": { 
+      "exercise": "{{ .Get "exercise"}}",
+      "username": "{{ .Get "username"}}"
+      
+      }
       }
       """
     )

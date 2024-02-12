@@ -6,6 +6,7 @@ input NewSet {
   exercise: String!
   reps: Int!
   weight: Float
+  username:String
 }
 
 type Mutation {
