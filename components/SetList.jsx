@@ -1,11 +1,12 @@
-import { View, Text, ActivityIndicator, FlatList } from 'react-native'
-import { GraphQLClient, gql } from "graphql-request";
+import {  Text, ActivityIndicator, FlatList } from 'react-native'
+import {  gql } from "graphql-request";
 import { useQuery } from '@tanstack/react-query';
 import client from './graphqlClient';
+import { useAuth } from '../providers/AuthContext';
 
 const setsQuery = gql`
-query MyQuery($exercise: String){
-    sets(exercise: $exercise) {
+query MyQuery($exercise: String, $username: String!){
+    sets(exercise: $exercise, username: $username) {
       documents {
         _id
         exercise
@@ -16,15 +17,16 @@ query MyQuery($exercise: String){
   }
 `
 const SetList = ({ListHeaderComponent, exerciseName}) => {
+  const {username} = useAuth();
 
  const { data,isLoading,error} = useQuery({
         queryKey:['sets',exerciseName],
-        queryFn:async ()=> client.request(setsQuery,{exercise: exerciseName})
+        queryFn:async ()=> client.request(setsQuery,{exercise: exerciseName, username:username})
 
     })
-    
-    if(isLoading) return <ActivityIndicator/>
-   
+
+  if(isLoading) return <ActivityIndicator/>
+  
    
   return (
     <FlatList
