@@ -1,4 +1,4 @@
-import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from "react-native"
+import { ActivityIndicator,StyleSheet, Text, View } from "react-native"
 import { useLocalSearchParams, Stack } from "expo-router";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -6,6 +6,7 @@ import { gql } from "graphql-request";
 import client from "../components/graphqlClient";
 import NewSetInput from "../components/NewSetInput";
 import SetList from "../components/SetList";
+import ProgressGraph from "../components/ProgressGraph";
 const exerciseQuery = gql`
 query exercises( $name: String) {
 exercises( name: $name) {
@@ -57,6 +58,7 @@ function exerciseDetails() {
       {isExpanded ? 'See Less' : 'See More'}
       </Text>
       </View>
+      <ProgressGraph/>
       <NewSetInput exerciseName={exercise.name}/>
       </View>
       )}/>

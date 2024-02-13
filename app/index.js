@@ -47,6 +47,8 @@ export default function App() {
 
   const exercises = data?.pages.flatMap((page) => page.exercises);
  
+  if(exercises.length === 0) return <Text> No exercise found for this.</Text>
+ 
   return (
     <View style={styles.container}>
     <Stack.Screen
