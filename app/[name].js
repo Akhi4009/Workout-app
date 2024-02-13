@@ -58,7 +58,6 @@ function exerciseDetails() {
       {isExpanded ? 'See Less' : 'See More'}
       </Text>
       </View>
-      <ProgressGraph/>
       <NewSetInput exerciseName={exercise.name}/>
       </View>
       )}/>

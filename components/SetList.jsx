@@ -1,9 +1,10 @@
-import {  Text, ActivityIndicator, FlatList } from 'react-native'
+import { ActivityIndicator, FlatList } from 'react-native'
 import {  gql } from "graphql-request";
 import { useQuery } from '@tanstack/react-query';
 import client from './graphqlClient';
 import { useAuth } from '../providers/AuthContext';
-
+import SetListItem from './SetListItem';
+import ProgressGraph from "./ProgressGraph"
 const setsQuery = gql`
 query MyQuery($exercise: String, $username: String!){
     sets(exercise: $exercise, username: $username) {
@@ -27,25 +28,25 @@ const SetList = ({ListHeaderComponent, exerciseName}) => {
 
   if(isLoading) return <ActivityIndicator/>
   
-   
+   const sets = data?.sets?.documents
   return (
     <FlatList
     showsVerticalScrollIndicator={false}
-    ListHeaderComponent={ListHeaderComponent}
-    data={data?.sets?.documents}
-    renderItem={({item}) => (
-        <Text style={{
-            backgroundColor:'white',
-            padding: 10,
-            borderRadius: 5,
-            overflow: 'hidden'
-            }}>
-        {item.reps} * {item.weight} {' '}
-        </Text>
+    data={sets}
+    ListHeaderComponent={() => (
+      <>
+      <ListHeaderComponent/>
+      <ProgressGraph sets={sets}/>
+      </>
     )}
+    renderItem={({item}) => (
+      <SetListItem item={item} />
+      )}
     />
   )
 }
+  
+      
 
 
 

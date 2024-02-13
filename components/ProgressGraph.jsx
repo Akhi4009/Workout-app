@@ -1,22 +1,19 @@
 import { StyleSheet, Text, View } from 'react-native'
-
 import {LineGraph} from "react-native-graph";
 
-function ProgressGraph () {
-    const points =[
-        {
-            date: new Date('2024-01-01'),
-            value:10,
-        },
-        {
-            date: new Date('2024-01-02'),
-            value:15,
-        },
-        {
-            date: new Date('2024-01-03'),
-            value:50,
-        }
-];
+const idToDate = (id) => {
+    const timestamp = parseInt(id.substr(0, 8), 16) * 1000;
+    return new Date(timestamp);
+  };
+
+  
+function ProgressGraph ({sets = []}) {
+    const points = sets.map((set) => ({
+        date: idToDate(set._id),
+        value: set.reps * set.weight,
+      }));
+  
+
  
     return (
       <View style={styles.container}>
