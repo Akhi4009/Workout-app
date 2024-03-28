@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "Workouts",
+    "description": " This is a exercise app",
     "slug": "Workouts",
     "scheme": "Workouts",
     "version": "1.0.0",
@@ -22,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.akhileshiet.Workouts"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -30,6 +32,14 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "efe42aa1-6653-4c0a-bf2b-c66b079644ea"
+      }
+    }
   }
 }
